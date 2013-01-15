@@ -10,6 +10,24 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 0) do
+ActiveRecord::Schema.define(:version => 20130115032640) do
+
+  create_table "ecm_tournaments_series", :force => true do |t|
+    t.string   "name"
+    t.text     "description"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
+
+  create_table "ecm_tournaments_tournaments", :force => true do |t|
+    t.datetime "begins_at"
+    t.datetime "ends_at"
+    t.text     "description"
+    t.integer  "ecm_tournaments_series_id"
+    t.datetime "created_at",                :null => false
+    t.datetime "updated_at",                :null => false
+  end
+
+  add_index "ecm_tournaments_tournaments", ["ecm_tournaments_series_id"], :name => "index_ecm_tournaments_tournaments_on_ecm_tournaments_series_id"
 
 end
