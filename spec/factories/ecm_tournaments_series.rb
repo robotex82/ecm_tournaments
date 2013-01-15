@@ -2,7 +2,7 @@
 
 FactoryGirl.define do
   factory :ecm_tournaments_series, :class => 'Ecm::Tournaments::Series' do
-    sequence(:name) { |i| "Serie ##[i]" }
+    sequence(:name) { |i| "Serie ##{i}" }
   end
 end
 
