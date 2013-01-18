@@ -10,7 +10,24 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130115053309) do
+ActiveRecord::Schema.define(:version => 20130118130407) do
+
+  create_table "ecm_tournaments_matches", :force => true do |t|
+    t.integer  "ecm_tournaments_tournament_id"
+    t.integer  "first_team_id"
+    t.integer  "second_team_id"
+    t.integer  "parent_id"
+    t.integer  "lft"
+    t.integer  "rgt"
+    t.integer  "depth"
+    t.datetime "created_at",                    :null => false
+    t.datetime "updated_at",                    :null => false
+  end
+
+  add_index "ecm_tournaments_matches", ["ecm_tournaments_tournament_id"], :name => "index_ecm_tournaments_matches_on_ecm_tournaments_tournament_id"
+  add_index "ecm_tournaments_matches", ["first_team_id"], :name => "index_ecm_tournaments_matches_on_first_team_id"
+  add_index "ecm_tournaments_matches", ["parent_id"], :name => "index_ecm_tournaments_matches_on_parent_id"
+  add_index "ecm_tournaments_matches", ["second_team_id"], :name => "index_ecm_tournaments_matches_on_second_team_id"
 
   create_table "ecm_tournaments_participants", :force => true do |t|
     t.integer  "ecm_tournaments_tournament_id"
@@ -29,6 +46,16 @@ ActiveRecord::Schema.define(:version => 20130115053309) do
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
   end
+
+  create_table "ecm_tournaments_sets", :force => true do |t|
+    t.integer  "first_team_score"
+    t.integer  "second_team_score"
+    t.integer  "ecm_tournaments_match_id"
+    t.datetime "created_at",               :null => false
+    t.datetime "updated_at",               :null => false
+  end
+
+  add_index "ecm_tournaments_sets", ["ecm_tournaments_match_id"], :name => "index_ecm_tournaments_sets_on_ecm_tournaments_match_id"
 
   create_table "ecm_tournaments_team_memberships", :force => true do |t|
     t.integer  "ecm_tournaments_team_id"
@@ -53,11 +80,21 @@ ActiveRecord::Schema.define(:version => 20130115053309) do
     t.datetime "ends_at"
     t.text     "description"
     t.integer  "ecm_tournaments_series_id"
+    t.integer  "ecm_tournaments_type_id"
     t.datetime "created_at",                :null => false
     t.datetime "updated_at",                :null => false
   end
 
   add_index "ecm_tournaments_tournaments", ["ecm_tournaments_series_id"], :name => "index_ecm_tournaments_tournaments_on_ecm_tournaments_series_id"
+  add_index "ecm_tournaments_tournaments", ["ecm_tournaments_type_id"], :name => "index_ecm_tournaments_tournaments_on_ecm_tournaments_type_id"
+
+  create_table "ecm_tournaments_types", :force => true do |t|
+    t.string   "name"
+    t.text     "description"
+    t.string   "class_identifier"
+    t.datetime "created_at",       :null => false
+    t.datetime "updated_at",       :null => false
+  end
 
   create_table "players", :force => true do |t|
     t.string   "firstname"

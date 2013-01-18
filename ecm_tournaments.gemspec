@@ -45,5 +45,8 @@ Gem::Specification.new do |s|
   # s.add_development_dependency 'guard-rails' # See gemfile for a patched version, for engine support.
   s.add_development_dependency 'guard-rspec'
   s.add_development_dependency 'guard-bundler'
+
+  # domain dependencies
+  s.add_development_dependency 'awesome_nested_set', '~> 2.1.5'
 end
 

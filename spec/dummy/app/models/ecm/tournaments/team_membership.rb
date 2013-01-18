@@ -7,7 +7,8 @@ module Ecm::Tournaments
                                              :foreign_key => :ecm_tournaments_participant_id
 
     # attributes
-    # attr_accessible :title, :body
+    attr_accessible :ecm_tournaments_participant,
+                    :ecm_tournaments_team
 
     # validations
     validates :ecm_tournaments_team, :presence => true
